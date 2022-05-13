@@ -26,25 +26,37 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('DisasterResponse.db', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
 def index():
-    
+
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # add some visualizations
+    # messages classified according to genre
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+
+    # extract data to plot top 5 and bottom 5 disaster response categories
+    categories_counts = dict()
+    for i in list(df.columns[4:]):
+        categories_counts[i] = df[i].sum()
+
+    categories_counts = dict(sorted(categories_counts.items(), key=lambda item: item[1]))
+    top_5_category_names = list(dict(list(categories_counts.items())[-5:]).keys())
+    top_5_category_values = list(dict(list(categories_counts.items())[-5:]).values())
+
+    bottom_5_category_names = list(dict(list(categories_counts.items())[:5]).keys())
+    bottom_5_category_values = list(dict(list(categories_counts.items())[:5]).values())
+
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -63,13 +75,53 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+
+        {
+            'data':[
+                Bar(
+                    x=top_5_category_names,
+                    y=top_5_category_values
+                )
+            ],
+
+            'layout': {
+                'title': 'Top 5 Disaster Response Cateories',
+                'yaxis': {
+                    'title': 'Count'
+                },
+                'xaxis': {
+                    'title':'Category Names'
+                }
+            }
+
+        },
+
+        {
+            'data':[
+                Bar(
+                    x=bottom_5_category_names,
+                    y=bottom_5_category_values
+                )
+            ],
+
+            'layout': {
+                'title': 'Bottom 5 Disaster Response Cateories',
+                'yaxis': {
+                    'title': 'Count'
+                },
+                'xaxis': {
+                    'title':'Category Names'
+                }
+            }
+
         }
     ]
-    
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    
+
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
 
@@ -78,13 +130,13 @@ def index():
 @app.route('/go')
 def go():
     # save user input in query
-    query = request.args.get('query', '') 
+    query = request.args.get('query', '')
 
     # use model to predict classification for query
     classification_labels = model.predict([query])[0]
     classification_results = dict(zip(df.columns[4:], classification_labels))
 
-    # This will render the go.html Please see that file. 
+    # This will render the go.html Please see that file.
     return render_template(
         'go.html',
         query=query,
