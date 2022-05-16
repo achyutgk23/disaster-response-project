@@ -84,4 +84,4 @@ This project is released under [MIT License](https://choosealicense.com/licenses
 
 # **Screenshots of Web Page and Model Results**  
 
-![](pictures/model_result.png
+![](pictures/model_result.png)
