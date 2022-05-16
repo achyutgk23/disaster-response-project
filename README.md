@@ -81,3 +81,14 @@ Below are the steps taken to clean the dataset:
 # **License**
 
 This project is released under [MIT License](https://choosealicense.com/licenses/mit/)
+
+# **Screenshots of Web Page and Model Results**  
+
+Model Results
+![](pictures/model_result.png)
+
+Webpage Images
+![](pictures/webpage_1.png)
+![](pictures/webpage_2.png)
+![](pictures/webpage_3.png)
+![](pictures/webpage_4.png)
