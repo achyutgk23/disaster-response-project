@@ -5,11 +5,13 @@ In this project, the data was analyzed, cleaned and a classification model was b
 # **Packages and Installations**
 Clone the repository to run the project in local machine. Install the required dependencies listed below using pip, if not already installed.
 The packages required to run the project are
-- numpy
 - pandas
-- scikit-learn
-- nltk
 - sqlalchemy
+- nltk
+- scikit-learn
+- pickle-mixin
+- flask
+- plotly
 - joblib
 
 ##### Clone the git repository
@@ -18,11 +20,11 @@ The packages required to run the project are
 
 ##### Open command prompt  
 `$ cd disaster-response-project`  
-`$ pip install numpy pandas scikit-learn nltk sqlalchemy joblib`  
+`$ pip install pandas sqlalchemy nltk scikit-learn pickle-mixin flask plotly joblib`  
 `$ python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`  
 `$ python models/train_classifier.py DisasterResponse.db models/classifier.pkl`  
-`$ app/run.py`
-
+`$ cd app`  
+`$ python run.py`
 After hosting the website use the 'WORKSPACE ID' and 'WORKSPACE DOMAIN' in the url to launch the website as shown below.
 
 https://WORKSPACEID-3001.WORKSPACEDOMAIN  
