@@ -7,8 +7,8 @@ from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar
-from sklearn.externals import joblib
+from plotly.graph_objs import Bar, Scatter
+from joblib import load
 from sqlalchemy import create_engine
 
 
@@ -26,11 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/DisasterResponse.db')
+engine = create_engine('sqlite:///../DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse.db', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -50,13 +50,13 @@ def index():
         categories_counts[i] = df[i].sum()
 
     categories_counts = dict(sorted(categories_counts.items(), key=lambda item: item[1]))
-    top_5_category_names = list(dict(list(categories_counts.items())[-5:]).keys())
-    top_5_category_values = list(dict(list(categories_counts.items())[-5:]).values())
+    top_10_category_names = list(dict(list(categories_counts.items())[-10:]).keys())
+    top_10_category_values = list(dict(list(categories_counts.items())[-10:]).values())
 
-    bottom_5_category_names = list(dict(list(categories_counts.items())[:5]).keys())
-    bottom_5_category_values = list(dict(list(categories_counts.items())[:5]).values())
+    bottom_10_category_names = list(dict(list(categories_counts.items())[:10]).keys())
+    bottom_10_category_values = list(dict(list(categories_counts.items())[:10]).values())
 
-    # create visuals
+ # create visuals
     graphs = [
         {
             'data': [
@@ -76,10 +76,9 @@ def index():
                 }
             }
         },
-
         {
             'data':[
-                Bar(
+                Scatter(
                     x=top_5_category_names,
                     y=top_5_category_values
                 )
@@ -96,10 +95,9 @@ def index():
             }
 
         },
-
         {
             'data':[
-                Bar(
+                Scatter(
                     x=bottom_5_category_names,
                     y=bottom_5_category_values
                 )
