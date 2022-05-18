@@ -24,13 +24,9 @@ The packages required to run the project are
 `$ python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`  
 `$ python models/train_classifier.py DisasterResponse.db models/classifier.pkl`  
 `$ cd app`  
-`$ python run.py`
-After hosting the website use the 'WORKSPACE ID' and 'WORKSPACE DOMAIN' in the url to launch the website as shown below.
+`$ python run.py`  
 
-https://WORKSPACEID-3001.WORKSPACEDOMAIN  
-WORKSPACE ID and WORKSPACE DOMAIN can be found using the below command in cmd
 
-`env | grep WORK`
 
 # **About Dataset**  
 The dataset has been provided by Figure Eight.  
