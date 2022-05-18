@@ -26,6 +26,7 @@ The packages required to run the project are
 `$ cd app`  
 `$ python run.py`  
 
+![](pictures/webapp_hosting.png)
 
 
 # **About Dataset**  
