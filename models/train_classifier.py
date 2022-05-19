@@ -106,17 +106,17 @@ def build_model():
         ])
 
     # # Create a parameter grid for hyper-parameter tuning of the classifier.
-    # param = [
-    #     {'vect__ngram_range':[(1, 1), (1, 2)],
-    #     'clf__n_estimators': [200, 230, 260],
-    #     'clf__bootstrap': [True, False]}
-    #     ]
+    param = [
+        {'vect__ngram_range':[(1, 1), (1, 2)],
+        'clf__n_estimators': [200, 230, 260],
+        'clf__bootstrap': [True, False]}
+        ]
     #
     # # Create a 'GridSearchCV' function, pass 'pipeline' and
     # # 'paramer grid' as arguments and return the function with the name 'cv'.
-    # cv = GridSearchCV(pipeline, param_grid=param)
+    cv = GridSearchCV(pipeline, param_grid=param)
 
-    return pipeline
+    return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
     """Evaluate the model performance by using the evaluation metric
