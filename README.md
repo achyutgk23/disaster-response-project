@@ -26,7 +26,9 @@ The packages required to run the project are
 `$ cd app`  
 `$ python run.py`  
 
-![](pictures/webapp_hosting.png)
+![](pictures/webapp_hosting.png)  
+
+The web URL for the web app will be "http://127.0.0.1:3001" just above WARNING
 
 
 # **About Dataset**  
