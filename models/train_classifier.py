@@ -27,9 +27,9 @@ def load_data(database_filepath):
                        the data is stored
 
     Returns:
-    X: ndarray. An ndarray and an input variable
+    X: ndarray. An ndarray/input variable
        containing message column of the df datasets
-    Y: DataFrame. A dataframe and a target variable
+    Y: DataFrame. A dataframe/target variable
        containing all 36 categories columns
     category_names: list. A python list containing target variable category_names
     """
@@ -111,9 +111,9 @@ def build_model():
         'clf__n_estimators': [200, 230, 260],
         'clf__bootstrap': [True, False]}
         ]
-    #
-    # # Create a 'GridSearchCV' function, pass 'pipeline' and
-    # # 'paramer grid' as arguments and return the function with the name 'cv'.
+    # #
+    # # # Create a 'GridSearchCV' function, pass 'pipeline' and
+    # # # 'paramer grid' as arguments and return the function with the name 'cv'.
     cv = GridSearchCV(pipeline, param_grid=param)
 
     return cv
