@@ -43,7 +43,7 @@ The web URL for the web app will be "http://127.0.0.1:3001" just above WARNING
 2. The data folder contains three files viz.
   - 'disaster_messages' which contains four columns viz.  
     1. id - Each message is associated with a specific id.
-    2. message - essages in english received, regarding disaster
+    2. message - Messages in english, received regarding disaster
     3. original - Messages in their original languages received, regarding disaster
     4. genre - The messages were classified into three genres viz. 'direct', 'news' and 'social'
   - 'disaster_categories' which has the data regarding which message is associated with which category. This dataset contains two columns,
@@ -68,7 +68,7 @@ The dataset has been provided by Figure Eight.
 The dataset contains two csv files viz. 'disaster_categories.csv' and 'disaster_messages.csv'.   
 1. The disaster_messages.csv file contains four variables viz.
 - id - Each message is associated with specified id.
-- message - Messages in english received, regarding disaster
+- message - Messages in english, received regarding disaster
 - original - Messages in their original languages received, regarding disaster  
 - genre - The messages were classified into three genres viz. 'direct', 'news' and 'social'  
 
@@ -77,12 +77,12 @@ The dataset contains two csv files viz. 'disaster_categories.csv' and 'disaster_
 - categories - A given message was classified into a single or multiple categories  
 
 # **Imbalanced Dataset**  
-Imbalanced datasets are those where observations with one class are far more greater in number than other classes.  
-For example a medical facility has a dataset of patients regarding a particular disease. If the dataset contains 1000 observations/data points and out of those 1000 observations 950 observations belong to class 'no disease' and 50 observations belong to 'disease', then this dataset is said to have class imbalance.  
+Imbalanced datasets are those where observations associated with one class are far more greater in number than other classes.  
+For example a medical facility has a dataset of patients regarding a particular disease. If the dataset contains 1000 observations/data points and out of those 1000 observations 950 observations belong to class 'no disease' class and 50 observations belong to 'disease' class, then that dataset is said to have class imbalance.  
 ##### Problems with Imbalanced dataset
-- Since one class is far more greater in number than others, then the classifier may get biased towards the class with majority of observations.
+- Since one class is far more greater in number than others, the classifier may get biased towards the class with majority of observations.
 
-- Let's consider the above example and train a classifier on the dataset. After training, if we evaluate the model's performance on test set then, even if the model predicts all the observations as 'no disease', the model's accuracy will be 95% which is generally considered as very good but choosing accuracy in this case as a metric to evaluate the model will be invalid or irrelevant.
+- Let's consider the above example about disease dataset and train a classifier on the dataset. After training, if we evaluate the model's performance on test set then, even if the model predicts all the observations as 'no disease', the model's accuracy will be 95% which is generally considered as very good, but choosing accuracy in this case as a metric to evaluate the model's performance will be invalid or irrelevant.
 Hence we have to consider other metrics to evaluate these types of datasets.
 
 - There are several ways to tackle data imbalance problem and in this project 'f1 score' and 'macro average' metrics were used to analyze the performance of the classifier.
@@ -93,16 +93,17 @@ Hence we have to consider other metrics to evaluate these types of datasets.
 Below are the steps taken to clean the dataset:
 - After loading the above mentioned two datasets, these datasets were merged using the common variable 'id' and saved in the new variable 'df'.
 
-- A new variable called 'categories_new' is created and only 'categories' column is extracted from 'df' variable and stored in new 'categories_new' variable.
-- The 'categories' variable which consists only one column was split into 36 columns. After splitting the columns, they were named accordingly.
-- From the previously merged 'df' dataset, 'categories' column was dropped and 'categories_new' variable was merged to it.
+- A new variable called 'categories_new' is created. Only the 'categories' column is extracted from 'df' variable and stored in new 'categories_new' variable.
+- The 'categories_new' variable which consists only one column was split into 36 columns. After splitting the columns, they were named accordingly.
+- From the 'df' dataset, 'categories' column was dropped and 'categories_new' variable was merged to it.
 - Then all the duplicates were dropped from 'df' dataset and the cleaned dataset was saved into a sqlite database.
 
 ##### Model Buliding
+Below are the steps taken to build the model:
 - The data was retrieved from the database file and again stored in 'df' variable
 
 - From the 'df' variable X and y values were extracted along with all the 36 category names which were stored in 'category_names' variable.
-- A function named 'tokenize' is written to pre-process the input text data which takes only one argument called 'text'. The text preprocessing includes 'Normalization', 'Tokenization', 'Stop Word Removal' and 'Lemmatization'.
+- A function named 'tokenize' was written to pre-process the input text data which takes only one argument called 'text'. The text preprocessing includes 'Normalization', 'Tokenization', 'Stop Word Removal' and 'Lemmatization'.
 - Next a pipeline was built which includes `CountVectorizer(tokenizer=tokenize)`, `TfidfTransformer()` and `MultiOutputClassifier(RandomForestClassifier())`.
 - A parameter grid was created to tune the hyper-parameters of the classifier using `GridSearchcv()` method.
 
@@ -117,10 +118,10 @@ This project is released under [MIT License](https://choosealicense.com/licenses
 
 # **Screenshots of Web Page and Model Results**  
 
-Model Results
+##### Model Results
 ![](pictures/model_result.png)
 
-Webpage Images
+#### Webpage Images
 ![](pictures/webpage_1.png)
 ![](pictures/webpage_2.png)
 ![](pictures/webpage_3.png)
