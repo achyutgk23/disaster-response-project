@@ -40,7 +40,7 @@ def clean_data(df):
                    a classification algorithm
     """
 
-    # Splitt categories column into 36 different columns
+    # Split categories column into 36 different columns
     categories_new = df['categories'].str.split(';', expand=True)
 
     # Extract column names from the categories_new dataset
