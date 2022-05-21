@@ -1,5 +1,5 @@
 # **Disaster Response Classification Project**
-This project aims to classify real time messages received from places where disaster is happening. These messages are collected in the real time and classified/directed towards relevant categories/departments of Disaster Response Team. The dataset from Figure Eight has been used for this project.
+This project aims to classify real time messages received from places where disaster is happening. These messages are collected in the real time and classified/directed towards relevant categories/departments of Disaster Response Team. The dataset from 'Figure Eight' has been used for this project.
 In this project, the data was analyzed, cleaned and a classification model was built to classify the messages to relevant organizations.
 
 # **Packages and Installations**
@@ -29,6 +29,38 @@ The packages required to run the project are
 ![](pictures/webapp_hosting.png)  
 
 The web URL for the web app will be "http://127.0.0.1:3001" just above WARNING
+
+# **About files in the repository**  
+
+1. The app folder contains another folder named 'templates' and one python script called 'run.py'   
+
+  - In the templates folder there are two html files which have the content and structure of the web-app viz.  
+    1. go.html
+    2. master.html
+  - The python script run.py contains flask web framework which is essential to launch the web page and some plotly graphs which are encoded in JSON.  
+
+
+2. The data folder contains three files viz.
+  - 'disaster_messages' which contains four columns viz.  
+    1. id - Each message is associated with a specific id.
+    2. message - essages in english received, regarding disaster
+    3. original - Messages in their original languages received, regarding disaster
+    4. genre - The messages were classified into three genres viz. 'direct', 'news' and 'social'
+  - 'disaster_categories' which has the data regarding which message is associated with which category. This dataset contains two columns,
+    1. id - common column between two csv files, used to merge two datasets.
+    2.  categories - A given message was classified into a single or multiple categories.
+ - A python script named 'process_data.py' which contains python code that cleans the data for classification algorithm.  
+
+
+3. 'models' folder contains only one python script named 'train_classifier.py' which contains python code that builds the model, evaluates it and saves the model in pickle format.
+
+4. 'pictures' folder contains images of model results and web-app.
+
+5. DisasterResponse.db file is the sqlite database which contains cleaned data from the process_data.py file.
+
+6. RAEDME.md is the file which documents the details of the project.   
+
+
 
 
 # **About Dataset**  
@@ -61,8 +93,8 @@ Hence we have to consider other metrics to evaluate these types of datasets.
 Below are the steps taken to clean the dataset:
 - After loading the above mentioned two datasets, these datasets were merged using the common variable 'id' and saved in the new variable 'df'.
 
-- Next, only disaster_categories dataset was considered and the 'categories' column was split into 36 columns. After splitting the columns, they were named accordingly.  
-- After splitting and naming the 36 categories, all the values under these columns were converted into 0's and 1's and saved into 'categories_new' variable.
+- A new variable called 'categories_new' is created and only 'categories' column is extracted from 'df' variable and stored in new 'categories_new' variable.
+- The 'categories' variable which consists only one column was split into 36 columns. After splitting the columns, they were named accordingly.
 - From the previously merged 'df' dataset, 'categories' column was dropped and 'categories_new' variable was merged to it.
 - Then all the duplicates were dropped from 'df' dataset and the cleaned dataset was saved into a sqlite database.
 
