@@ -14,6 +14,7 @@ from sqlalchemy import create_engine
 
 app = Flask(__name__)
 
+# Function for text pre-processing
 def tokenize(text):
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
@@ -44,7 +45,7 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
-    # extract data to plot top 5 and bottom 5 disaster response categories
+    # extract data to plot top 10 and bottom 10 disaster response categories
     categories_counts = dict()
     for i in list(df.columns[4:]):
         categories_counts[i] = df[i].sum()
@@ -79,13 +80,13 @@ def index():
         {
             'data':[
                 Scatter(
-                    x=top_5_category_names,
-                    y=top_5_category_values
+                    x=top_10_category_names,
+                    y=top_10_category_values
                 )
             ],
 
             'layout': {
-                'title': 'Top 5 Disaster Response Cateories',
+                'title': 'Top 10 Disaster Response Cateories',
                 'yaxis': {
                     'title': 'Count'
                 },
@@ -98,13 +99,13 @@ def index():
         {
             'data':[
                 Scatter(
-                    x=bottom_5_category_names,
-                    y=bottom_5_category_values
+                    x=bottom_10_category_names,
+                    y=bottom_10_category_values
                 )
             ],
 
             'layout': {
-                'title': 'Bottom 5 Disaster Response Cateories',
+                'title': 'Bottom 10 Disaster Response Cateories',
                 'yaxis': {
                     'title': 'Count'
                 },
