@@ -31,7 +31,7 @@ def load_data(database_filepath):
        containing message column of the df datasets
     Y: DataFrame. A dataframe/target variable
        containing all 36 categories columns
-    category_names: list. A python list containing target variable category_names
+    category_names: list. A python list containing target variable category names
     """
 
     # Load the data from the database into 'df' dataframe
@@ -57,7 +57,7 @@ def tokenize(text):
     tokenization, stop word removal and lemmatization.
 
     Args:
-    text: str. messages from people during a DisasterResponse
+    text: str. messages from people during a Disaster
 
     Returns:
     clean_words: list. A python list of words which are left after preprocessing
@@ -87,7 +87,7 @@ def tokenize(text):
 
 def build_model():
     """Construct a pipeline consisting of 'CountVectorizer' function,
-    'TfidfTransformer' and 'Random RandomForestClassifier'
+    'TfidfTransformer' and 'RandomForestClassifier'
 
     Args:
     None
@@ -120,7 +120,7 @@ def build_model():
 
 def evaluate_model(model, X_test, Y_test, category_names):
     """Evaluate the model performance by using the evaluation metric
-    'classification_report'.
+    'classification_report' from scikit-learn.
 
     Args:
     model: GridSearchCV object. Model obtained from the 'build_model' function
