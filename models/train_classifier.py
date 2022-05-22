@@ -15,9 +15,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
+import bz2file as bz2
 import pickle
-
-
 
 def load_data(database_filepath):
     """Load the data into df variable from the database file.
@@ -105,15 +104,15 @@ def build_model():
         ('clf', RandomForestClassifier(n_jobs=-1))
         ])
 
-    # # Create a parameter grid for hyper-parameter tuning of the classifier.
+    # # # Create a parameter grid for hyper-parameter tuning of the classifier.
     param = [
         {'vect__ngram_range':[(1, 1), (1, 2)],
         'clf__n_estimators': [200, 230, 260],
         'clf__bootstrap': [True, False]}
         ]
-    # #
-    # # # Create a 'GridSearchCV' function, pass 'pipeline' and
-    # # # 'paramer grid' as arguments and return the function with the name 'cv'.
+    # # #
+    # # # # Create a 'GridSearchCV' function, pass 'pipeline' and
+    # # # # 'paramer grid' as arguments and return the function with the name 'cv'.
     cv = GridSearchCV(pipeline, param_grid=param)
 
     return cv
@@ -140,7 +139,6 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 
-
 def save_model(model, model_filepath):
     """Save the model with best parameters in 'pickle' format.
 
@@ -152,8 +150,10 @@ def save_model(model, model_filepath):
     None
     """
 
-    # Save the trained and hyper-parameter tuned model into the directory
-    pickle.dump(model, open(model_filepath, 'wb'))
+    # # Save the trained and hyper-parameter tuned model into the directory
+
+    with bz2.BZ2File(model_filepath + '.pbz2', 'w') as f:
+        pickle.dump(model, f)
 
 
 def main():
