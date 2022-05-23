@@ -57,9 +57,8 @@ The web URL for the web app will be "http://127.0.0.1:3001" just above WARNING
 
 4. 'pictures' folder contains images of model results and web-app.
 
-5. DisasterResponse.db file is the sqlite database which contains cleaned data from the process_data.py file.
 
-6. RAEDME.md is the file which documents the details of the project.   
+5. RAEDME.md is the file which documents the details of the project.   
 
 
 
