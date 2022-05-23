@@ -23,7 +23,7 @@ The packages required to run the project are
 `$ cd disaster-response-project`  
 `$ pip install pandas sqlalchemy nltk scikit-learn pickle-mixin bz2file flask plotly joblib`  
 `$ python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`  
-`$ python models/train_classifier.py DisasterResponse.db models/classifier.pkl`  
+`$ python models/train_classifier.py DisasterResponse.db models/classifier.pkl.bz2`  
 `$ cd app`  
 `$ python run.py`  
 
