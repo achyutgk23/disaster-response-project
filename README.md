@@ -29,7 +29,7 @@ The packages required to run the project are
 
 ![](pictures/webapp_hosting.png)  
 
-The web URL for the web app will be "http://127.0.0.1:3001" just above WARNING
+The web URL for the web app will be "http://127.0.0.1:3001" just below WARNING
 
 # **About files in the repository**  
 
